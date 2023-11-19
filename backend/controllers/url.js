@@ -1,4 +1,4 @@
-const { nanoid } = require('nanoid');
+const shortID = require('./id');
 const URL = require('../models/schema');
 
 /*
@@ -12,7 +12,7 @@ async function createURL(req, res) {
         return;
     }
 
-    const id = nanoid(8);
+    const id = shortID(url);
     const shortUrl = id;
 
     try {
