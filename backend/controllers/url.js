@@ -12,13 +12,23 @@ async function createURL(req, res) {
         return;
     }
 
+    const existingURL = await URL.findOne({ long_url: url });
+
+    if (existingURL) {
+        existingURL.last_visited = Date.now();
+        console.log("URL's short Url already exists");
+        res.json({ short_url: existingURL.short_url });
+        return;
+    }
+
     const id = shortID(url);
     const shortUrl = id;
 
     try {
         await URL.create({
             long_url: url,
-            short_url: id 
+            short_url: id,
+            last_visited: Date.now(),
         });
 
         console.log("URL created");
