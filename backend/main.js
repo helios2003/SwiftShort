@@ -10,6 +10,7 @@ const routes = require('./routes/routes');
 const redis = require('./controllers/cache');
 
 dotenv.config();
+
 async function connectDatabase() {
   try {
     await mongoose.connect('mongodb://localhost:27017/urls');
@@ -19,14 +20,17 @@ async function connectDatabase() {
   }
 }
 connectDatabase()
+mongoose.connection.setMaxListeners(20);
+
 const app = express();
 app.use(cors());
 app.use(bodyParser.json());
 app.use('/', routes);
 
-cron.schedule('0 * * * *', async () => {
+cron.schedule('*/10 * * * * *', async () => {
   await redis.updateTopURLs();
 });
+
 
 app.use(express.static(path.join(__dirname, 'frontend')));
 app.get('/', (req, res) => {
