@@ -1,8 +1,7 @@
-function generateURL() {
+async function generateURL() {
     var inputURL = document.getElementById("url").value;
-    var outputURL = document.getElementById("shortenedUrl");
     
-    fetch("placeholder", {
+    const response = await fetch("http://localhost:5000/generate", {
         method: "POST",
         body: JSON.stringify({
             url: inputURL
@@ -10,12 +9,16 @@ function generateURL() {
         headers: {
             "Content-Type": "application/json"
         }
-    })
-    .then(response => response.json())
-    .then(data => {
-        outputURL.value = data.shortenedUrl;
-    })
-    .catch(error => console.error("Error:", error));
+    });
+
+    if (response.ok) {
+        const responseData = await response.json();
+
+        document.getElementById('shortenedUrl').value = responseData.short_url;
+        document.getElementById('shortenedUrl').style.display = 'block';
+    } else {
+        alert("HTTP-Error: " + response.status);
+    }
 
     console.log(inputURL);
 }

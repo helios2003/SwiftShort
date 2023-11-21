@@ -1,10 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <script src="index.js"></script>
+    <script src="index.js" defer></script>
     <style>
         h1 {
             text-align: center;
@@ -23,19 +24,18 @@
         .form-container {
             display: flex;
             justify-content: space-between;
-            width: 80%; 
+            width: 80%;
         }
 
         form {
             text-align: center;
             padding: 20px;
-            
             border-radius: 8px;
-            width: 45%; 
+            width: 45%;
         }
 
         input[type="text"] {
-            width: 80%; 
+            width: 80%;
             padding: 10px;
             margin-bottom: 10px;
             box-sizing: border-box;
@@ -51,18 +51,20 @@
         }
     </style>
 </head>
+
 <body>
     <h1>URL - Shortener</h1>
 
     <div class="form-container">
         <form>
-            <input type="text" name="url" placeholder="Enter URL">
-            <button type="input" onclick="generateUrl()">Generate URL</button>
+            <input type="text" id="url" placeholder="Enter URL">
+            <button type="button" onclick="generateURL()">Generate URL</button>
         </form>
 
         <form>
-            <input type="text" name="shortenedUrl" placeholder="Shortened URL">
+            <input type="text" id="shortenedUrl" placeholder="Shortened URL">
         </form>
     </div>
 </body>
+
 </html>
