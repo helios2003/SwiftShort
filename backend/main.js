@@ -13,7 +13,7 @@ dotenv.config();
 
 async function connectDatabase() {
   try {
-    await mongoose.connect('mongodb://localhost:27017/urls');
+    await mongoose.connect(process.env.MONGODB_CONNECTION_STRING);
     console.log('Connected to database');
   } catch (error) {
     console.error('Error connecting to database:', error.message);

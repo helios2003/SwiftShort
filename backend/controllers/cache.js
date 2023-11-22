@@ -1,11 +1,15 @@
 const Redis = require('ioredis');
+const dotenv = require('dotenv');
+dotenv.config();
 const URL = require('../models/schema');
 const client = Redis.createClient({
-    host: 'localhost',
-    port: 6379,
-}
-);
+    host: process.env.REDIS_SERVER,
+    port: process.env.REDIS_PORT,
+});
 
+/*
+    Lists the top 5% of URLs in the Redis cache.
+*/
 async function getTopURLs() {
     try {
         const URLs = await URL.countDocuments();
@@ -21,6 +25,10 @@ async function getTopURLs() {
     }
 }
 
+/*
+    Updates the top URLs in the Redis after deleting it's old contents and 
+    then adding the new ones as returned by the getTopURLs() function.
+*/
 async function updateTopURLs() {
     try {
         await client.del('topURLs');
@@ -35,7 +43,6 @@ async function updateTopURLs() {
         console.error('Error updating top URLs in Redis cache:', error.message);
     }
 }
-
 
 module.exports = {
     updateTopURLs,

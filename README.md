@@ -10,5 +10,3 @@ SwiftShort is a URL shortener. I made it primarily for learning basic system des
 
 ## System Design
 ![System Design](assets/system_design.png)
-
-2023-11-22T10:04:51.150+00:00
