@@ -16,6 +16,7 @@ async function createURL(req, res) {
 
     if (existingURL) {
         existingURL.last_visited = Date.now();
+        await existingURL.save();
         console.log("URL's short Url already exists");
         res.json({ short_url: existingURL.short_url });
         return;

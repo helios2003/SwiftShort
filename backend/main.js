@@ -19,26 +19,29 @@ async function connectDatabase() {
     console.error('Error connecting to database:', error.message);
   }
 }
-connectDatabase()
-mongoose.connection.setMaxListeners(20);
 
-const app = express();
-app.use(cors());
-app.use(bodyParser.json());
-app.use('/', routes);
+async function startServer() {
+  await connectDatabase();
+  mongoose.connection.setMaxListeners(20);
 
-cron.schedule('*/10 * * * * *', async () => {
-  await redis.updateTopURLs();
-});
+  const app = express();
+  app.use(cors());
+  app.use(bodyParser.json());
+  app.use('/', routes);
 
+  cron.schedule('*/10 * * * * *', async () => {
+    await redis.updateTopURLs();
+  });
 
-app.use(express.static(path.join(__dirname, 'frontend')));
-app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, 'frontend', 'index.html'));
-});
+  app.use(express.static(path.join(__dirname, 'frontend')));
+  app.get('/', (req, res) => {
+    res.sendFile(path.join(__dirname, 'frontend', 'index.html'));
+  });
 
+  const PORT = process.env.PORT || 3000;
+  app.listen(PORT, () => {
+    console.log(`Server is running on port ${PORT}`);
+  });
+}
 
-const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}`);
-});
+startServer();
