@@ -29,7 +29,7 @@ async function startServer() {
   app.use(bodyParser.json());
   app.use('/', routes);
 
-  cron.schedule('*/10 * * * * *', async () => {
+  cron.schedule('*/3 * * * *', async () => {
     await redis.updateTopURLs();
   });
 
