@@ -14,7 +14,7 @@ services:
   redis:
     build:
       context: ./backend
-      dockerfile: Dockerfile.redis 
+      dockerfile: Redis.Dockerfile
     ports:
       - "6379:6379"
     container_name: redis
@@ -27,7 +27,7 @@ services:
   backend:
     build:
       context: ./backend
-      dockerfile: Dockerfile.node  
+      dockerfile: Node.Dockerfile  
     ports:
       - "5000:5000"
     container_name: backend
