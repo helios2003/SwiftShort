@@ -6,6 +6,19 @@ services:
     ports:
       - "3000:80"
     container_name: frontend
+    depends_on:
+      - backend
+    networks:
+      - swiftshort-network
+
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile.node  
+    ports:
+      - "5000:5000"
+    container_name: backend
+    restart: always
     networks:
       - swiftshort-network
 

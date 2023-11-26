@@ -7,7 +7,7 @@ const path = require('path');
 const cron = require('node-cron');
 
 const routes = require('./routes/routes');
-const redis = require('./controllers/cache');
+//const redis = require('./controllers/cache');
 
 dotenv.config();
 
@@ -29,9 +29,9 @@ async function startServer() {
   app.use(bodyParser.json());
   app.use('/', routes);
 
-  cron.schedule('*/3 * * * *', async () => {
-    await redis.updateTopURLs();
-  });
+  // cron.schedule('*/3 * * * *', async () => {
+  //   await redis.updateTopURLs();
+  // });
 
   app.use(express.static(path.join(__dirname, 'frontend')));
   app.get('/', (req, res) => {
