@@ -11,6 +11,19 @@ services:
     networks:
       - swiftshort-network
 
+  redis:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile.redis 
+    ports:
+      - "6379:6379"
+    container_name: redis
+    restart: always
+    depends_on:
+      - backend
+    networks:
+      - swiftshort-network
+
   backend:
     build:
       context: ./backend

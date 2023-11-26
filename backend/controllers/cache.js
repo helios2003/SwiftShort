@@ -2,7 +2,7 @@ const Redis = require('ioredis');
 const dotenv = require('dotenv');
 dotenv.config();
 const URL = require('../models/schema');
-const client = Redis.createClient({
+const client = new Redis({
     host: process.env.REDIS_SERVER,
     port: process.env.REDIS_PORT,
 });

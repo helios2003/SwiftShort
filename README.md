@@ -10,6 +10,12 @@ SwiftShort is a URL shortener. I made it primarily for learning basic system des
 4. Run ``redis-server`` to start the redis server.
 4. Run `npm start` to start the server.
 
+## Using Docker to Set up the Repository
+1. Clone the repository.
+2. Change the name of ``.env.example`` to ``.env`` and fill the environment variables.
+3. Run ``docker-compose build`` to build the containers.
+4. Run ``docker-compose up -d`` to start the containers. 
+
 ## Using the Shortener
 
 1. In ``index.html`` insert the URL you want to shorten in the input field.
