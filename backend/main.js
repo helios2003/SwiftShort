@@ -5,7 +5,6 @@ const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const path = require('path');
 const cron = require('node-cron');
-
 const routes = require('./routes/routes');
 const redis = require('./controllers/cache');
 
@@ -29,6 +28,7 @@ async function startServer() {
   app.use(bodyParser.json());
   app.use('/', routes);
 
+  // cron job for regular updation of URLs in the redis cache
   cron.schedule('*/3 * * * *', async () => {
     await redis.updateTopURLs();
   });
