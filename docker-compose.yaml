@@ -2,9 +2,11 @@ version: '3'
 
 services:
   frontend:
-    build: ./frontend
+    build:
+      context: ./src
+      dockerfile: Dockerfile.frontend
     ports:
-      - "3000:80"
+      - "4000:80"
     container_name: frontend
     depends_on:
       - backend
@@ -13,10 +15,10 @@ services:
 
   backend:
     build:
-      context: ./backend
-      dockerfile: Dockerfile  
+      context: ./src
+      dockerfile: Dockerfile.backend 
     ports:
-      - "5000:5000"
+      - "3000:3000"
     container_name: backend
     restart: always
     networks:

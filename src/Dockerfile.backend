@@ -1,7 +1,7 @@
 FROM node:latest as base
-WORKDIR /backend
-COPY package*.json /backend/
+WORKDIR /src
+COPY package*.json /src/
 RUN npm install
 COPY . .
-EXPOSE 5000
+EXPOSE 3000
 CMD ["npm", "start"]
