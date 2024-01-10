@@ -1,7 +1,7 @@
 async function generateURL() {
     var inputURL = document.getElementById("url").value;
     
-    const fetchResponse = await fetch("http://localhost:3000/generate", {
+    const fetchResponse = await fetch("https://swift-short-backend.onrender.com/generate", {
         method: "POST",
         body: JSON.stringify({
             url: inputURL

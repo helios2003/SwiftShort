@@ -28,7 +28,7 @@ async function createURL(req, res) {
     try {
         await URL.create({
             long_url: url,
-            short_url: id,
+            short_url: "https://swift-short-backend.onrender.com" + id,
             last_visited: Date.now(),
         });
 
