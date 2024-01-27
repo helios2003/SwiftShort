@@ -3,6 +3,6 @@ const { createURL, redirectURL } = require('../controllers/url');
 const router = express.Router();
 
 router.post('/generate', createURL);
-router.get('/:short_url', redirectURL);
+router.get('/:hashedValue', redirectURL);
 
 module.exports = router;

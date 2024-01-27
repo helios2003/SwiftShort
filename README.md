@@ -7,15 +7,16 @@ SwiftShort is a URL shortener. I made it primarily for learning basic system des
 2. Go the frontend directory and run `index.html` in your browser.
 3. Go the backend directory and run `npm install`.
 4. Change the name of ``.env.example`` to ``.env`` and fill the environment variables.
-5. Go to redis cloud to start the redis server instance and use **Redis-Client** code snippet's credentials in your ``.env ``file.
+5. Start a redis server on port 6379 suing the command `redis-server`.
 6. Run `npm start` to start the server.
+7. Go to `localhost:3000` in your browser to use the shortener.
 
 ## Using Docker to Set up the Repository
+
 1. Clone the repository.
 2. Change the name of ``.env.example`` to ``.env`` and fill the environment variables.
 3. Run ``docker-compose build`` to build the containers.
-4. Run ``docker-compose up -d`` to start the containers. 
-5. Frontend runs on port 3000 and backend runs on port 5000.
+4. Run ``docker-compose up -d`` to start the containers in detached mode. 
 
 ## Using the Shortener
 

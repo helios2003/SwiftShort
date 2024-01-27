@@ -1,5 +1,7 @@
 const shortID = require('./id');
 const URL = require('../models/schema');
+const dotenv = require('dotenv');
+dotenv.config();
 
 /*
 @params req: request object (contains the original URL)
@@ -23,12 +25,12 @@ async function createURL(req, res) {
     }
 
     const id = shortID(url);
-    const shortUrl = id;
+    const shortUrl = process.env.BACKEND_URL + id;
 
     try {
         await URL.create({
             long_url: url,
-            short_url: "https://swift-short-backend.onrender.com" + id,
+            short_url: shortUrl,
             last_visited: Date.now(),
         });
 
@@ -45,8 +47,9 @@ async function createURL(req, res) {
 @params res: response object (contains the original URL)
 */
 async function redirectURL(req, res) {
-    const { short_url } = req.params;
-
+    const { hashedValue } = req.params
+    const short_url = process.env.BACKEND_URL + hashedValue
+    console.log(short_url);
     try {
         const result = await URL.findOne({ short_url });
 

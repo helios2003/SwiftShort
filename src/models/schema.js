@@ -1,4 +1,8 @@
 const mongoose = require('mongoose');
+const dotenv = require('dotenv');
+dotenv.config({ path: './.env' })
+
+mongoose.connect(process.env.MONGODB_CONNECTION_STRING)
 
 const urlSchema = new mongoose.Schema({
   long_url: {

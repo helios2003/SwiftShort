@@ -4,8 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <script src="index.js" defer></script>
+    <title>URL - Shortener</title>
     <style>
         h1 {
             text-align: center;
@@ -50,6 +49,40 @@
             cursor: pointer;
         }
     </style>
+    <script>
+        async function generateURL() {
+            
+            async function loadConfig() {
+                const response = await fetch("./config.json");
+                const config = await response.json();
+                return config;
+            }
+            const config = await loadConfig();
+            var inputURL = document.getElementById("url").value;
+            console.log(inputURL)
+            const fetchResponse = await fetch(`${config}/generate`, {
+                method: "POST",
+                body: JSON.stringify({
+                    url: inputURL
+                }),
+                headers: {
+                    "Content-Type": "application/json"
+                }
+            });
+
+            if (fetchResponse.ok) {
+                let responseData = await fetchResponse.json();
+                const shortenedUrl = responseData.short_url;
+                console.log(shortenedUrl)
+                document.getElementById('shortenedUrl').value = shortenedUrl;
+                document.getElementById('shortenedUrl').style.display = 'block';
+            } else {
+                alert("HTTP-Error: " + fetchResponse.status);
+            }
+
+            console.log(inputURL);
+        }
+    </script>
 </head>
 
 <body>

@@ -1,6 +1,6 @@
 FROM node:latest as base
-WORKDIR /src
-COPY package*.json /src/
+WORKDIR /app
+COPY package*.json ./
 RUN npm install
 COPY . .
 EXPOSE 3000
