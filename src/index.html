@@ -52,15 +52,15 @@
     <script>
         async function generateURL() {
             
-            async function loadConfig() {
-                const response = await fetch("./config.json");
-                const config = await response.json();
-                return config;
-            }
-            const config = await loadConfig();
+            // async function loadConfig() {
+            //     const response = await fetch("./config.json");
+            //     const config = await response.json();
+            //     return config;
+            // }
+            // const config = await loadConfig();
             var inputURL = document.getElementById("url").value;
             console.log(inputURL)
-            const fetchResponse = await fetch(`${config.backendUrl}/generate`, {
+            const fetchResponse = await fetch("https://ss-xd85.onrender.com/generate", {
                 method: "POST",
                 body: JSON.stringify({
                     url: inputURL
