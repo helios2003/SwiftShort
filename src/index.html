@@ -60,7 +60,7 @@
             const config = await loadConfig();
             var inputURL = document.getElementById("url").value;
             console.log(inputURL)
-            const fetchResponse = await fetch(`${config}/generate`, {
+            const fetchResponse = await fetch(`${config.backendUrl}/generate`, {
                 method: "POST",
                 body: JSON.stringify({
                     url: inputURL
